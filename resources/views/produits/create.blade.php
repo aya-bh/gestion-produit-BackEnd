@@ -1,0 +1,75 @@
+<form method="POST" action="{{ route('enregistrement_produit') }}" enctype="multipart/form-data" >
+    @csrf
+    <h4 class="modal-title center mb-2">Ajouter Produit</h4>
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input value="{{ old('nom') }}" type="text" class="form-control" name="nom" placeholder="Nom" required>
+
+        @if ($errors->has('nom'))
+            <span class="text-danger text-left">{{ $errors->first('nom') }}</span>
+        @endif
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input value="{{ old('description') }}" type="text" class="form-control" name="description"
+            placeholder="Description" required>
+
+        @if ($errors->has('description'))
+            <span class="text-danger text-left">{{ $errors->first('description') }}</span>
+        @endif
+    </div>
+
+    <div class="mb-3">
+        <label for="quantite" class="form-label">Quantité</label>
+        <input value="{{ old('quantite') }}" type="number" class="form-control" name="quantite"
+            placeholder="quantite" required>
+
+        @if ($errors->has('quantite'))
+            <span class="text-danger text-left">{{ $errors->first('quantite') }}</span>
+        @endif
+    </div>
+
+    <div class="mb-3">
+        <label for="categorie" class="form-label">Catégorie</label>
+        <select class="form-control" name="categorie_id" required>
+            <option value="">Selectionner catégorie</option>
+            @foreach ($categories as $categories)
+                <option value="{{ $categories->id }}">
+                    {{ $categories->nom }}
+                </option>
+            @endforeach
+        </select>
+        @if ($errors->has('categorie_id'))
+            <span class="text-danger text-left">{{ $errors->first('categorie_id') }}</span>
+        @endif
+    </div>
+    <div class="mb-3">
+        <label for="imagecodebarre" class="form-label">Code à barre</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" name="imagecodebarre">
+            <input type="hidden" name="codebarre_id">
+            <label class="custom-file-label" for="customFile">Sélectionner Image</label>
+          </div>
+        @if ($errors->has('imagecodebarre'))
+            <span class="text-danger text-left">{{ $errors->first('imagecodebarre') }}</span>
+        @endif
+    </div>
+    <div class="mb-3">
+        <label for="imageqrcode" class="form-label">QR CODE</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" name="imageqrcode">
+            <input type="hidden" name="qrcode_id">
+            <label class="custom-file-label" for="customFile">Sélectionner Image</label>
+          </div>
+        @if ($errors->has('imageqrcode'))
+            <span class="text-danger text-left">{{ $errors->first('imageqrcode') }}</span>
+        @endif
+    </div>
+   
+
+    <div class="float-right">
+        <button type="submit" class="btn btn-danger">Enregistrer</button>
+        <button data-dismiss="modal" type="button" class="btn btn-default">Annuler</button>
+    </div>
+</form>
